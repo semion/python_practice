@@ -47,19 +47,6 @@ decimals = {
     90:	'ninety'
 }
 
-hundreds = {
-    100: 'one hundred',
-    200: 'two hundred',
-    300: 'three hundred',
-    400: 'four hundred',
-    500: 'five hundred',
-    600: 'six hundred',
-    700: 'seven hundred',
-    800: 'eight hundred',
-    900: 'nine hundred'
-}
-
-
 def humanize(number):
     parts = split_into_parts(number)
     powers = [10 ** i for i in range(len(parts)-1, -1, -1)]
@@ -70,7 +57,8 @@ def humanize(number):
     out = []
     for i, p in zip(powers, parts):
         if i == 100:
-            out.append(hundreds[p*i])
+            out.extend([digits[p], 'hundred'])
+
             if parts[-1] == 0 and parts[-2] == 0:
                 break
             out.append('and')
